@@ -153,7 +153,13 @@ const UniversityDetailPage = () => {
         <ThreeDTourViewer url={university.tour3dUrl} />
       </SectionCard>
 
-      <div className="flex gap-3">
+      <div className="flex flex-wrap gap-3">
+        <Link
+          to={`/universities/${university.id}/predict`}
+          className="rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:from-indigo-700 hover:to-purple-700"
+        >
+          Check Admission Chance
+        </Link>
         <Link
           to="/comparison"
           className="rounded-lg bg-primary-600 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-700"

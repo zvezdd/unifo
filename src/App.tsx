@@ -6,6 +6,7 @@ import UniversityDetailPage from './pages/UniversityDetailPage'
 import ProgramDetailPage from './pages/ProgramDetailPage'
 import ComparisonPage from './pages/ComparisonPage'
 import AdminPage from './pages/AdminPage'
+import AdmissionPredictionPage from './pages/AdmissionPredictionPage'
 import NotFoundPage from './pages/NotFoundPage'
 
 const App = () => {
@@ -18,6 +19,10 @@ const App = () => {
         <Route
           path="/universities/:id/programs/:programId"
           element={<ProgramDetailPage />}
+        />
+        <Route
+          path="/universities/:id/predict"
+          element={<AdmissionPredictionPage />}
         />
         <Route path="/comparison" element={<ComparisonPage />} />
         <Route path="/admin" element={<AdminPage />} />

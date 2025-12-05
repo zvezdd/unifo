@@ -19,6 +19,8 @@ VITE_FIREBASE_STORAGE_BUCKET=
 VITE_FIREBASE_MESSAGING_SENDER_ID=
 VITE_FIREBASE_APP_ID=
 VITE_ADMIN_PASSCODE=changeme   # optional simple guard for admin panel
+VITE_GROQ_API_KEY=             # Groq API key for admission prediction (recommended - free)
+VITE_OPENAI_API_KEY=           # OpenAI API key (optional backup)
 ```
 
 When Firebase values are missing, the app serves and mutates in-memory dummy data so you can test the UI immediately.
@@ -29,6 +31,7 @@ When Firebase values are missing, the app serves and mutates in-memory dummy dat
 - Firestore helpers and seed loader with dummy dataset for Nazarbayev University, KBTU, and AITU.
 - Search and filter by name/city/program, add to comparison (up to 3), and embed 3D tours via iframe.
 - Admin panel to seed sample data and create universities/programs (writes to Firestore when configured).
+- **AI-powered admission prediction** using Gemini AI - predicts admission chances based on GPA, UNT, IELTS, SAT, program, and budget.
 - Tailwind CSS, responsive layout, loading/error states, and React Router 7 navigation.
 
 ## Scripts
@@ -59,6 +62,8 @@ When Firebase values are missing, the app serves and mutates in-memory dummy dat
    - `VITE_FIREBASE_MESSAGING_SENDER_ID`
    - `VITE_FIREBASE_APP_ID`
    - `VITE_ADMIN_PASSCODE` (optional)
+   - `VITE_GROQ_API_KEY` (for admission prediction - get free key at https://console.groq.com/)
+   - `VITE_OPENAI_API_KEY` (optional backup for admission prediction)
 
 4. **Deploy:**
    - Vercel will automatically build and deploy
