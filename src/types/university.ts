@@ -1,7 +1,6 @@
 export type Program = {
   id: string
   title: string
-  faculty: string
   duration: string
   tuitionFee: string
   description: string
@@ -24,10 +23,8 @@ export type University = {
   name: string
   logoUrl: string
   location: string
-  mission: string
-  history: string
+  missionHistory: string
   achievements: string[]
-  leadership: string[]
   admissions: Admissions
   cooperation: Cooperation
   tour3dUrl?: string

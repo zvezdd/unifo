@@ -54,8 +54,8 @@ const ComparisonTable = ({ items }: Props) => {
       </div>
 
       {renderRow(
-        'Mission',
-        (u) => u.mission || '—',
+        'Mission & History',
+        (u) => u.missionHistory || '—',
       )}
       {renderRow(
         'Programs',

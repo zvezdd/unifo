@@ -46,7 +46,7 @@ const UniversityCard = ({ university }: Props) => {
       </div>
 
       <p className="mt-3 line-clamp-2 text-sm text-slate-600">
-        {university.mission}
+        {university.missionHistory}
       </p>
 
       <div className="mt-4 flex flex-wrap gap-2">

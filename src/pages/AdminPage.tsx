@@ -9,10 +9,8 @@ type FormValues = {
   name: string
   logoUrl: string
   location: string
-  mission: string
-  history: string
+  missionHistory: string
   achievements: string
-  leadership: string
   requirements: string
   deadlines: string
   scholarships: string
@@ -21,7 +19,6 @@ type FormValues = {
   foreignStudentInfo: string
   tour3dUrl: string
   programTitle: string
-  faculty: string
   duration: string
   tuitionFee: string
   description: string
@@ -56,10 +53,8 @@ const AdminPage = () => {
       name: '',
       logoUrl: '',
       location: '',
-      mission: '',
-      history: '',
+      missionHistory: '',
       achievements: '',
-      leadership: '',
       requirements: '',
       deadlines: '',
       scholarships: '',
@@ -68,7 +63,6 @@ const AdminPage = () => {
       foreignStudentInfo: '',
       tour3dUrl: '',
       programTitle: '',
-      faculty: '',
       duration: '',
       tuitionFee: '',
       description: '',
@@ -99,10 +93,8 @@ const AdminPage = () => {
           values.logoUrl?.trim() ||
           'https://placehold.co/120x120?text=University+Logo',
         location: values.location?.trim() || 'Kazakhstan',
-        mission: values.mission?.trim() || '',
-        history: values.history?.trim() || '',
+        missionHistory: values.missionHistory?.trim() || '',
         achievements: toList(values.achievements),
-        leadership: toList(values.leadership),
         admissions: {
           requirements: toList(values.requirements),
           deadlines: toList(values.deadlines),
@@ -121,7 +113,6 @@ const AdminPage = () => {
                   .toLowerCase()
                   .replace(/[^a-z0-9]+/g, '-')}`,
                 title: values.programTitle.trim(),
-                faculty: values.faculty?.trim() || '',
                 duration: values.duration?.trim() || '',
                 tuitionFee: values.tuitionFee?.trim() || '',
                 description: values.description?.trim() || '',
@@ -314,47 +305,25 @@ const AdminPage = () => {
         </div>
 
         <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-700">Mission</span>
+          <span className="font-semibold text-slate-700">Mission & History</span>
           <textarea
-            {...register('mission')}
-            rows={2}
+            {...register('missionHistory')}
+            rows={4}
             className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-            placeholder="University mission statement"
+            placeholder="University mission and history"
           />
         </label>
 
         <label className="flex flex-col gap-1 text-sm">
-          <span className="font-semibold text-slate-700">History</span>
+          <span className="font-semibold text-slate-700">
+            Achievements (one per line)
+          </span>
           <textarea
-            {...register('history')}
+            {...register('achievements')}
             rows={2}
             className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-            placeholder="Brief history"
           />
         </label>
-
-        <div className="grid gap-3 sm:grid-cols-2">
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-semibold text-slate-700">
-              Achievements (one per line)
-            </span>
-            <textarea
-              {...register('achievements')}
-              rows={2}
-              className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-semibold text-slate-700">
-              Leadership (one per line)
-            </span>
-            <textarea
-              {...register('leadership')}
-              rows={2}
-              className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-            />
-          </label>
-        </div>
 
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="flex flex-col gap-1 text-sm">
@@ -416,24 +385,14 @@ const AdminPage = () => {
           </label>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2">
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-semibold text-slate-700">Program title</span>
-            <input
-              {...register('programTitle')}
-              className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-              placeholder="e.g., Computer Science BSc"
-            />
-          </label>
-          <label className="flex flex-col gap-1 text-sm">
-            <span className="font-semibold text-slate-700">Faculty</span>
-            <input
-              {...register('faculty')}
-              className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
-              placeholder="School of Engineering"
-            />
-          </label>
-        </div>
+        <label className="flex flex-col gap-1 text-sm">
+          <span className="font-semibold text-slate-700">Program title</span>
+          <input
+            {...register('programTitle')}
+            className="rounded-lg border border-slate-200 px-3 py-2 shadow-sm focus:border-primary-300 focus:outline-none"
+            placeholder="e.g., Computer Science BSc"
+          />
+        </label>
 
         <div className="grid gap-3 sm:grid-cols-3">
           <label className="flex flex-col gap-1 text-sm">

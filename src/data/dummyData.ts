@@ -7,16 +7,13 @@ export const dummyUniversities: University[] = [
     logoUrl:
       'https://upload.wikimedia.org/wikipedia/commons/8/8f/Nazarbayev_University_logo.png',
     location: 'Astana, Kazakhstan',
-    mission:
-      'To be a leading center of education, research, and innovation in Kazakhstan.',
-    history:
-      'Founded in 2010 as a modern research university with international partnerships.',
+    missionHistory:
+      'To be a leading center of education, research, and innovation in Kazakhstan.\n\nFounded in 2010 as a modern research university with international partnerships.',
     achievements: [
       'Top research output in Central Asia',
       'Multiple QS-ranked programs',
       'State-of-the-art laboratories',
     ],
-    leadership: ['President: Shigeo Katsu', 'Provost: Ilesanmi Adesida'],
     admissions: {
       requirements: [
         'Completed secondary education',
@@ -41,7 +38,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'cs-bsc',
         title: 'Computer Science BSc',
-        faculty: 'School of Engineering & Digital Sciences',
         duration: '4 years',
         tuitionFee: '$8,000 per year',
         description:
@@ -50,7 +46,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'eee-bsc',
         title: 'Electrical & Electronic Engineering BSc',
-        faculty: 'School of Engineering & Digital Sciences',
         duration: '4 years',
         tuitionFee: '$8,000 per year',
         description:
@@ -64,14 +59,12 @@ export const dummyUniversities: University[] = [
     logoUrl:
       'https://upload.wikimedia.org/wikipedia/commons/9/95/KBTU_logo.png',
     location: 'Almaty, Kazakhstan',
-    mission:
-      'Deliver world-class technical education aligned with industry needs.',
-    history: 'Established in 2001 with support from the British Council.',
+    missionHistory:
+      'Deliver world-class technical education aligned with industry needs.\n\nEstablished in 2001 with support from the British Council.',
     achievements: [
       'Leading oil & gas engineering programs',
       'Strong industry partnerships with energy sector',
     ],
-    leadership: ['Rector: Aralbai Aralbaiuly'],
     admissions: {
       requirements: [
         'Unified National Testing (UNT) or equivalent',
@@ -91,7 +84,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'petro-bsc',
         title: 'Petroleum Engineering BSc',
-        faculty: 'School of Energy & Oil',
         duration: '4 years',
         tuitionFee: '$6,000 per year',
         description:
@@ -100,7 +92,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'fin-bsc',
         title: 'Finance BSc',
-        faculty: 'Business School',
         duration: '4 years',
         tuitionFee: '$5,500 per year',
         description: 'Corporate finance, fintech, and investment analysis.',
@@ -113,14 +104,12 @@ export const dummyUniversities: University[] = [
     logoUrl:
       'https://upload.wikimedia.org/wikipedia/commons/9/9f/Astana_IT_University_logo.svg',
     location: 'Astana, Kazakhstan',
-    mission:
-      'Prepare digital leaders and innovators for Kazakhstan and the region.',
-    history: 'Founded in 2019 with a focus on IT and digital transformation.',
+    missionHistory:
+      'Prepare digital leaders and innovators for Kazakhstan and the region.\n\nFounded in 2019 with a focus on IT and digital transformation.',
     achievements: [
       'National leader in ICT education',
       'Strong startup and innovation ecosystem',
     ],
-    leadership: ['Rector: Sergey Khripunov'],
     admissions: {
       requirements: ['UNT or foundation program', 'English placement test'],
       deadlines: ['Fall intake: July 15'],
@@ -137,7 +126,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'se-bsc',
         title: 'Software Engineering BSc',
-        faculty: 'School of Computer Science',
         duration: '4 years',
         tuitionFee: '$4,500 per year',
         description: 'Full-stack development, cloud-native systems, DevOps.',
@@ -145,7 +133,6 @@ export const dummyUniversities: University[] = [
       {
         id: 'cyber-bsc',
         title: 'Cybersecurity BSc',
-        faculty: 'School of Cybersecurity',
         duration: '4 years',
         tuitionFee: '$4,800 per year',
         description: 'Network security, cryptography, and security operations.',

@@ -61,7 +61,7 @@ export const fetchUniversities = async (
         id: d.id,
         programs: data.programs || [],
         achievements: data.achievements || [],
-        leadership: data.leadership || [],
+        missionHistory: data.missionHistory || '',
         admissions: data.admissions || {
           requirements: [],
           deadlines: [],
@@ -98,10 +98,8 @@ export const upsertUniversity = async (payload: University) => {
         name: data.name || '',
         logoUrl: data.logoUrl || '',
         location: data.location || 'Kazakhstan',
-        mission: data.mission || '',
-        history: data.history || '',
+        missionHistory: data.missionHistory || '',
         achievements: data.achievements || [],
-        leadership: data.leadership || [],
         admissions: {
           requirements: data.admissions?.requirements || [],
           deadlines: data.admissions?.deadlines || [],

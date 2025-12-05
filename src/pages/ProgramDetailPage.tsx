@@ -42,15 +42,13 @@ const ProgramDetailPage = () => {
         />
         <div>
           <h1 className="text-xl font-bold text-slate-900">{program.title}</h1>
-          <p className="text-sm text-slate-500">
-            {university.name} — {program.faculty}
-          </p>
+          <p className="text-sm text-slate-500">{university.name}</p>
         </div>
       </div>
 
       <p className="text-sm text-slate-700">{program.description}</p>
 
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2">
         <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
           <p className="font-semibold text-slate-900">Duration</p>
           <p>{program.duration}</p>
@@ -58,10 +56,6 @@ const ProgramDetailPage = () => {
         <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
           <p className="font-semibold text-slate-900">Tuition</p>
           <p>{program.tuitionFee}</p>
-        </div>
-        <div className="rounded-lg bg-slate-50 p-3 text-sm text-slate-700">
-          <p className="font-semibold text-slate-900">Faculty</p>
-          <p>{program.faculty}</p>
         </div>
       </div>
 

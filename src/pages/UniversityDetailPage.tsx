@@ -62,7 +62,6 @@ const UniversityDetailPage = () => {
             <p className="text-sm text-slate-500">{university.location}</p>
           </div>
         </div>
-        <p className="text-sm text-slate-700">{university.mission}</p>
         <div className="flex flex-wrap gap-2">
           {university.achievements.map((ach) => (
             <span
@@ -75,16 +74,9 @@ const UniversityDetailPage = () => {
         </div>
       </div>
 
-      <div className="grid gap-4 lg:grid-cols-3">
-        <SectionCard title="History">
-          <p>{university.history}</p>
-        </SectionCard>
-        <SectionCard title="Leadership">
-          <ul className="list-disc pl-4">
-            {university.leadership.map((leader) => (
-              <li key={leader}>{leader}</li>
-            ))}
-          </ul>
+      <div className="grid gap-4 lg:grid-cols-2">
+        <SectionCard title="Mission & History">
+          <p>{university.missionHistory}</p>
         </SectionCard>
         <SectionCard title="Admissions">
           <div className="space-y-2">
