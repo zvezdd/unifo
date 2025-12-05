@@ -98,10 +98,17 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
 
   const saveUniversity = useCallback(async (u: University) => {
     setLoading(true)
-    await upsertUniversity(u)
-    await load(filters)
-    setLoading(false)
-  }, [filters, load])
+    setError(undefined)
+    try {
+      await upsertUniversity(u)
+      await load()
+    } catch (err) {
+      setError('Failed to save university. Please try again.')
+      console.error(err)
+    } finally {
+      setLoading(false)
+    }
+  }, [load])
 
   const removeUniversity = useCallback(async (id: string) => {
     setLoading(true)
@@ -125,7 +132,20 @@ export const AppProvider = ({ children }: PropsWithChildren) => {
       saveUniversity,
       removeUniversity,
     }),
-    [loading, error, universities, filtered, comparison, filters],
+    [
+      loading,
+      error,
+      universities,
+      filtered,
+      comparison,
+      filters,
+      load,
+      setFilters,
+      toggleCompare,
+      seed,
+      saveUniversity,
+      removeUniversity,
+    ],
   )
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>

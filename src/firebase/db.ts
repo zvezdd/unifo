@@ -1,5 +1,4 @@
 import {
-  addDoc,
   collection,
   deleteDoc,
   doc,
@@ -42,23 +41,44 @@ export const fetchUniversities = async (
     return applyFilters(memoryUniversities, filters)
   }
 
-  const constraints = []
-  if (filters?.city) {
-    constraints.push(
-      where('location', '>=', filters.city),
-      where('location', '<=', `${filters.city}\uf8ff`),
+  try {
+    const constraints = []
+    if (filters?.city) {
+      constraints.push(
+        where('location', '>=', filters.city),
+        where('location', '<=', `${filters.city}\uf8ff`),
+      )
+    }
+    const snap = await getDocs(
+      constraints.length
+        ? query(universitiesCollection, ...constraints)
+        : universitiesCollection,
     )
+    const items = snap.docs.map((d) => {
+      const data = d.data() as Omit<University, 'id'>
+      return {
+        ...data,
+        id: d.id,
+        programs: data.programs || [],
+        achievements: data.achievements || [],
+        leadership: data.leadership || [],
+        admissions: data.admissions || {
+          requirements: [],
+          deadlines: [],
+          scholarships: [],
+        },
+        cooperation: data.cooperation || {
+          partners: [],
+          exchangePrograms: [],
+          foreignStudentInfo: '',
+        },
+      } as University
+    })
+    return applyFilters(items, filters)
+  } catch (error) {
+    console.error('Firebase fetch error:', error)
+    return applyFilters(memoryUniversities, filters)
   }
-  const snap = await getDocs(
-    constraints.length
-      ? query(universitiesCollection, ...constraints)
-      : universitiesCollection,
-  )
-  const items = snap.docs.map((d) => {
-    const data = d.data() as University
-    return { ...data, id: d.id }
-  })
-  return applyFilters(items, filters)
 }
 
 export const fetchUniversity = async (id: string): Promise<University | null> =>
@@ -70,15 +90,39 @@ export const upsertUniversity = async (payload: University) => {
   }
 
   if (isFirebaseConfigured && db && universitiesCollection) {
-    const ref = payload.id
-      ? doc(universitiesCollection, payload.id)
-      : doc(universitiesCollection)
-    const { id, ...data } = payload
-    if (payload.id) {
-      await setDoc(ref, data, { merge: true })
-    } else {
-      const createdRef = await addDoc(universitiesCollection, data)
-      payload.id = createdRef.id
+    try {
+      const ref = doc(universitiesCollection, payload.id)
+      const { id, ...data } = payload
+      
+      const firestoreData = {
+        name: data.name || '',
+        logoUrl: data.logoUrl || '',
+        location: data.location || 'Kazakhstan',
+        mission: data.mission || '',
+        history: data.history || '',
+        achievements: data.achievements || [],
+        leadership: data.leadership || [],
+        admissions: {
+          requirements: data.admissions?.requirements || [],
+          deadlines: data.admissions?.deadlines || [],
+          scholarships: data.admissions?.scholarships || [],
+        },
+        cooperation: {
+          partners: data.cooperation?.partners || [],
+          exchangePrograms: data.cooperation?.exchangePrograms || [],
+          foreignStudentInfo: data.cooperation?.foreignStudentInfo || '',
+        },
+        tour3dUrl: data.tour3dUrl || '',
+        programs: data.programs || [],
+      }
+      
+      await setDoc(ref, firestoreData, { merge: true })
+      console.log('Successfully saved university to Firestore:', payload.id)
+    } catch (error) {
+      console.error('Firebase save error:', error)
+      throw new Error(
+        `Failed to save to Firebase: ${error instanceof Error ? error.message : 'Unknown error'}`,
+      )
     }
   }
 

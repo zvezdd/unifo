@@ -43,6 +43,8 @@ const AdminPage = () => {
   })
   const [passInput, setPassInput] = useState('')
   const [authError, setAuthError] = useState('')
+  const [saveError, setSaveError] = useState('')
+  const [saveSuccess, setSaveSuccess] = useState(false)
 
   const {
     register,
@@ -74,53 +76,72 @@ const AdminPage = () => {
   })
 
   const onSubmit = async (values: FormValues) => {
-    const id =
-      values.id ||
-      values.name
-        .toLowerCase()
-        .replace(/[^a-z0-9]+/g, '-')
-        .replace(/(^-|-$)/g, '')
+    setSaveError('')
+    setSaveSuccess(false)
+    
+    try {
+      if (!values.name.trim()) {
+        setSaveError('University name is required')
+        return
+      }
 
-    const payload: University = {
-      id,
-      name: values.name,
-      logoUrl:
-        values.logoUrl ||
-        'https://placehold.co/120x120?text=University+Logo',
-      location: values.location || 'Kazakhstan',
-      mission: values.mission,
-      history: values.history,
-      achievements: toList(values.achievements),
-      leadership: toList(values.leadership),
-      admissions: {
-        requirements: toList(values.requirements),
-        deadlines: toList(values.deadlines),
-        scholarships: toList(values.scholarships),
-      },
-      cooperation: {
-        partners: toList(values.partners),
-        exchangePrograms: toList(values.exchangePrograms),
-        foreignStudentInfo: values.foreignStudentInfo,
-      },
-      tour3dUrl: values.tour3dUrl,
-      programs: values.programTitle
-        ? [
-            {
-              id: `${id}-${values.programTitle
-                .toLowerCase()
-                .replace(/[^a-z0-9]+/g, '-')}`,
-              title: values.programTitle,
-              faculty: values.faculty,
-              duration: values.duration,
-              tuitionFee: values.tuitionFee,
-              description: values.description,
-            },
-          ]
-        : [],
+      const id =
+        values.id ||
+        values.name
+          .toLowerCase()
+          .replace(/[^a-z0-9]+/g, '-')
+          .replace(/(^-|-$)/g, '')
+
+      const payload: University = {
+        id,
+        name: values.name.trim(),
+        logoUrl:
+          values.logoUrl?.trim() ||
+          'https://placehold.co/120x120?text=University+Logo',
+        location: values.location?.trim() || 'Kazakhstan',
+        mission: values.mission?.trim() || '',
+        history: values.history?.trim() || '',
+        achievements: toList(values.achievements),
+        leadership: toList(values.leadership),
+        admissions: {
+          requirements: toList(values.requirements),
+          deadlines: toList(values.deadlines),
+          scholarships: toList(values.scholarships),
+        },
+        cooperation: {
+          partners: toList(values.partners),
+          exchangePrograms: toList(values.exchangePrograms),
+          foreignStudentInfo: values.foreignStudentInfo?.trim() || '',
+        },
+        tour3dUrl: values.tour3dUrl?.trim() || '',
+        programs: values.programTitle?.trim()
+          ? [
+              {
+                id: `${id}-${values.programTitle
+                  .toLowerCase()
+                  .replace(/[^a-z0-9]+/g, '-')}`,
+                title: values.programTitle.trim(),
+                faculty: values.faculty?.trim() || '',
+                duration: values.duration?.trim() || '',
+                tuitionFee: values.tuitionFee?.trim() || '',
+                description: values.description?.trim() || '',
+              },
+            ]
+          : [],
+      }
+
+      await saveUniversity(payload)
+      setSaveSuccess(true)
+      reset()
+      setTimeout(() => setSaveSuccess(false), 3000)
+    } catch (error) {
+      console.error('Error saving university:', error)
+      setSaveError(
+        error instanceof Error
+          ? error.message
+          : 'Failed to save university. Please try again.',
+      )
     }
-
-    await saveUniversity(payload)
-    reset()
   }
 
   const onAuth = () => {
@@ -232,6 +253,22 @@ const AdminPage = () => {
 
       {(loading || isSubmitting) && (
         <LoadingState label="Saving changes..." />
+      )}
+
+      {saveError && (
+        <div className="rounded-lg border border-red-200 bg-red-50 p-4">
+          <p className="text-sm font-semibold text-red-800">Error</p>
+          <p className="text-sm text-red-600 mt-1">{saveError}</p>
+        </div>
+      )}
+
+      {saveSuccess && (
+        <div className="rounded-lg border border-green-200 bg-green-50 p-4">
+          <p className="text-sm font-semibold text-green-800">Success</p>
+          <p className="text-sm text-green-600 mt-1">
+            University saved successfully!
+          </p>
+        </div>
       )}
 
       <form

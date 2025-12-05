@@ -37,3 +37,42 @@ When Firebase values are missing, the app serves and mutates in-memory dummy dat
 - `npm run build` — type-check + production build
 - `npm run preview` — preview build
 - `npm run lint` — ESLint
+
+## Deployment
+
+### Vercel (Recommended)
+
+1. **Push your code to GitHub/GitLab/Bitbucket**
+
+2. **Import project on Vercel:**
+   - Go to [vercel.com](https://vercel.com)
+   - Click "Add New Project"
+   - Import your repository
+   - Vercel will auto-detect Vite settings
+
+3. **Add Environment Variables:**
+   In Vercel dashboard → Project Settings → Environment Variables, add:
+   - `VITE_FIREBASE_API_KEY`
+   - `VITE_FIREBASE_AUTH_DOMAIN`
+   - `VITE_FIREBASE_PROJECT_ID`
+   - `VITE_FIREBASE_STORAGE_BUCKET`
+   - `VITE_FIREBASE_MESSAGING_SENDER_ID`
+   - `VITE_FIREBASE_APP_ID`
+   - `VITE_ADMIN_PASSCODE` (optional)
+
+4. **Deploy:**
+   - Vercel will automatically build and deploy
+   - Your app will be live at `your-project.vercel.app`
+
+**Note:** The `vercel.json` file is included for optimal routing configuration (SPA support).
+
+### Firebase Hosting (Alternative)
+
+```bash
+npm install -g firebase-tools
+firebase login
+firebase init hosting
+# Select: dist as public directory, single-page app: Yes
+npm run build
+firebase deploy
+```
